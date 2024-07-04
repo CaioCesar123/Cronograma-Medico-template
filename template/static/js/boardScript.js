@@ -25,14 +25,12 @@ document.getElementById('logOut').addEventListener('click', function (event) {
 });
 
 async function ListPaciente() {
+    debugger
     try {
         const userId = sessionStorage.getItem('userId');
-        const formData = new FormData();
-        formData.append('idUser', userId);
-        const url = 'http://127.0.0.1:5000/paciente/getList';
+        const url = `http://127.0.0.1:5000/paciente?idUser=${userId}`;
         const response = await fetch(url, {
-            method: 'post',
-            body: formData
+            method: 'get',
         });
 
         const data = await response.json();
@@ -178,12 +176,9 @@ async function listReceita(id) {
     try {
         $('#receitasModal').modal('show');
         document.getElementById('idPaciente').value = id
-        const formData = new FormData();
-        formData.append('idPaciente', id);
-        const url = 'http://127.0.0.1:5000/receita/getList';
+        const url = `http://127.0.0.1:5000/receita?idPaciente=${id}`;
         const response = await fetch(url, {
-            method: 'post',
-            body: formData
+            method: 'get'
         });
 
         const data = await response.json();
